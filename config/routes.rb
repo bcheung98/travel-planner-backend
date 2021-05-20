@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :user_destinations
   resources :destinations
 
-  post '/login', to: 'auth#create'
+  post '/login', to: 'sessions#create'
   get '/profile', to: 'users#profile'
 
 end
