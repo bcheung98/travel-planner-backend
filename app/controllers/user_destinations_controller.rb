@@ -17,7 +17,7 @@ class UserDestinationsController < ApplicationController
 
     private
     def user_destination_params()
-        params.require(:user_destinations).permit(:id)
+        params.require(:destination).permit(:id)
     end
 
 end
