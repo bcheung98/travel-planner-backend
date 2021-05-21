@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/profile', to: 'users#profile'
 
+  get "/my-destinations", to: "users#my_destinations"
+
 end
