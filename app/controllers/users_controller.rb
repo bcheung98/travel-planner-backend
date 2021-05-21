@@ -15,6 +15,20 @@ class UsersController < ApplicationController
         end
     end
 
+    def my_destinations()
+        destinations = User.find_by(id: @@user.id).destinations.map{|d| {
+            id: d.id,
+            name: d.name,
+            location: d.location,
+            country: d.country
+        }}
+        if destinations
+            render json: destinations, :status => :ok
+        else
+            render json: { error: "No destinations added" }, :status => :no_content
+        end
+    end
+
     private
     def user_params()
         params.require(:user).permit(:username, :email, :first_name, :last_name, :password, :password_confirmation)
