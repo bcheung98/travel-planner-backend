@@ -20,7 +20,11 @@ class UsersController < ApplicationController
             id: d.id,
             name: d.name,
             location: d.location,
-            country: d.country
+            country: d.country,
+            latitude: d.latitude,
+            longitude: d.longitude,
+            image: d.image,
+            description: d.description
         }}
         if destinations
             render json: destinations, :status => :ok

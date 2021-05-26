@@ -12,8 +12,8 @@ module DestinationData
         },
         {
             name: "Angkor Wat",
-            location: "Angkor",
-            country: "Siem Reap",
+            location: "Siem Reap",
+            country: "Cambodia",
             latitude: 13.4125,
             longitude: 103.866944,
             image: "https://upload.wikimedia.org/wikipedia/commons/4/44/Ankor_Wat_temple.jpg",
@@ -72,7 +72,7 @@ module DestinationData
             longitude: -1.826111,
             image: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Stonehenge2007_07_30.jpg",
             description: "A prehistoric monument consisting of various stone formations."
-        }
+        },
     ]
 
     def self.destinations()
