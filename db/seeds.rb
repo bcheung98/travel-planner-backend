@@ -12,6 +12,14 @@ def seed_users()
     puts "Done seeding users!"
 end
 
+def seed_trips()
+    puts "Destroying old trip data..."
+    Trip.destroy_all
+    puts "Seeding trips..."
+    2.times { User.all.each {|user| Trip.create(user_id: user.id) }}
+    puts "Done seeding trips!"
+end
+
 def seed_destinations()
     puts "Destroying old destination data..."
     Destination.destroy_all
@@ -20,14 +28,15 @@ def seed_destinations()
     puts "Done seeding destinations!"
 end
 
-def seed_user_destinations()
+def seed_trip_destinations()
     puts "Destroying old user destination data..."
-    UserDestination.destroy_all
+    TripDestination.destroy_all
     puts "Seeding user destination data..."
-    10.times { UserDestination.create(user_id: User.all.sample.id, destination_id: Destination.all.sample.id) }
+    10.times { TripDestination.create(trip_id: Trip.all.sample.id, destination_id: Destination.all.sample.id) }
     puts "Done seeding user destination data!"
 end
 
 seed_users()
+seed_trips()
 seed_destinations()
-seed_user_destinations()
+seed_trip_destinations()

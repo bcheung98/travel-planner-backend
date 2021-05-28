@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_033215) do
+ActiveRecord::Schema.define(version: 2021_05_27_175113) do
 
   create_table "destinations", force: :cascade do |t|
     t.string "name"
@@ -24,13 +24,20 @@ ActiveRecord::Schema.define(version: 2021_05_26_033215) do
     t.string "description"
   end
 
-  create_table "user_destinations", force: :cascade do |t|
-    t.integer "user_id", null: false
+  create_table "trip_destinations", force: :cascade do |t|
+    t.integer "trip_id", null: false
     t.integer "destination_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["destination_id"], name: "index_user_destinations_on_destination_id"
-    t.index ["user_id"], name: "index_user_destinations_on_user_id"
+    t.index ["destination_id"], name: "index_trip_destinations_on_destination_id"
+    t.index ["trip_id"], name: "index_trip_destinations_on_trip_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -43,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_05_26_033215) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "user_destinations", "destinations"
-  add_foreign_key "user_destinations", "users"
+  add_foreign_key "trip_destinations", "destinations"
+  add_foreign_key "trip_destinations", "trips"
+  add_foreign_key "trips", "users"
 end
