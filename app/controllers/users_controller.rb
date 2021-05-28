@@ -15,8 +15,21 @@ class UsersController < ApplicationController
         end
     end
 
+    def my_trips()
+        trips = User.find_by(id: @@user.id).trips.map {|trip| {
+            id: trip.id,
+            name: trip.name,
+            destinations: trip.destinations
+        }}
+        if trips
+            render json: { trips: trips }, :status => :ok
+        else
+            render json: { error: "An error occured" }, :status => :no_content
+        end
+    end
+
     def my_destinations()
-        destinations = User.find_by(id: @@user.id).destinations.map{|d| {
+        destinations = User.find_by(id: @@user.id).destinations.map {|d| {
             id: d.id,
             name: d.name,
             location: d.location,

@@ -1,8 +1,9 @@
 class User < ApplicationRecord
     has_secure_password
 
-    has_many :user_destinations, :dependent => :destroy
-    has_many :destinations, through: :user_destinations
+    has_many :trips, :dependent => :destroy
+    has_many :trip_destinations, through: :trips
+    has_many :destinations, through: :trip_destinations
 
     validates :username, uniqueness: true
     validates :password, length: { minimum: 6 }
