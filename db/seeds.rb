@@ -16,7 +16,7 @@ def seed_trips()
     puts "Destroying old trip data..."
     Trip.destroy_all
     puts "Seeding trips..."
-    2.times { User.all.each {|user| Trip.create(user_id: user.id) }}
+    2.times { User.all.each { |user| Trip.create(user_id: user.id, name: "Trip #{User.find_by(id: user.id).trips.size + 1}")}}
     puts "Done seeding trips!"
 end
 
