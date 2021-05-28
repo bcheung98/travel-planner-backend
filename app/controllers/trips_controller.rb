@@ -7,8 +7,9 @@ class TripsController < ApplicationController
     def create()
         trip = Trip.new
         trip.user = @@user
+        trip.name = "Trip #{@@user.trips.size + 1}"
         if trip.save
-            render json: trip, :status => :created
+            render json: { trip: trip }, :status => :created
         else
             render json: { error: trip.errors.full_messages }, :status => :bad_request
         end
