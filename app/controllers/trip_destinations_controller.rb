@@ -6,8 +6,8 @@ class TripDestinationsController < ApplicationController
 
     def create()
         trip_destination = TripDestination.new
-        trip_destination.user = @@user
-        trip_destination.destination_id = trip_destination_params[:id]
+        trip_destination.trip_id = trip_params[:id]
+        trip_destination.destination_id = destination_params[:id]
         if trip_destination.save
             render json: trip_destination, :status => :created
         else
@@ -25,8 +25,13 @@ class TripDestinationsController < ApplicationController
     end
 
     private
-    def trip_destination_params()
-        params.require(:destination).permit(:id)
+    def trip_params()
+        params.require(:trip).permit(:id)
+    end
+
+    private
+    def destination_params()
+        params.require(:destination).permit(:id, :trip_id, :name, :location, :country, :created_at, :updated_at, :latitude, :longitude, :image, :description)
     end
 
 end
