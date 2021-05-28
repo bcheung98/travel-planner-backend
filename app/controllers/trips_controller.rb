@@ -15,6 +15,15 @@ class TripsController < ApplicationController
         end
     end
 
+    def destroy()
+        trip = @@user.trips.find_by(id: params[:id])
+        if trip.destroy
+            render json: { success: "Trip successfully deleted" }, :status => :ok
+        else
+            render json: { error: "Unable to remove destination" }, :status => :bad_request
+        end
+    end
+
     def show()
         trip = trip.find_by(id: params[:id])
         render json: trip
