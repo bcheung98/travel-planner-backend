@@ -1,8 +1,11 @@
 require "./db/destinations.rb"
 
-def seed_users()
+def destroy_users()
     puts "Destroying old user data..."
     User.destroy_all
+end
+
+def seed_users()
     puts "Seeding users..."
     User.create(username: "mioakiyama", first_name: "Mio", last_name: "Akiyama", email: "leftybass@email.com", password: "password", password_confirmation: "password")
     User.create(username: "azusanakano", first_name: "Azusa", last_name: "Nakano", email: "azunyan@email.com", password: "password", password_confirmation: "password")
@@ -12,31 +15,48 @@ def seed_users()
     puts "Done seeding users!"
 end
 
-def seed_destinations()
+def destroy_destinations()
     puts "Destroying old destination data..."
     Destination.destroy_all
+end
+
+def seed_destinations()
     puts "Seeding destinations..."
     DestinationData.destinations.each {|destination| Destination.create(destination)}
     puts "Done seeding destinations!"
 end
 
-def seed_trips()
+def destroy_trips()
     puts "Destroying old trip data..."
     Trip.destroy_all
+end
+
+def seed_trips()
     puts "Seeding trips..."
     2.times { User.all.each { |user| Trip.create(user_id: user.id, name: "Trip #{user.trips.size + 1}")}}
     puts "Done seeding trips!"
 end
 
-def seed_trip_destinations()
+def destroy_trip_destinations()
     puts "Destroying old user destination data..."
     TripDestination.destroy_all
+end
+
+def seed_trip_destinations()
     puts "Seeding user destination data..."
     20.times { TripDestination.create(trip_id: Trip.all.sample.id, destination_id: Destination.all.sample.id) }
     puts "Done seeding user destination data!"
 end
 
-seed_users()
+t1 = Time.now
+# destroy_trip_destinations()
+destroy_destinations()
+# destroy_trips()
+# destroy_users()
+#seed_users()
 seed_destinations()
-seed_trips()
-seed_trip_destinations()
+#seed_trips()
+#seed_trip_destinations()
+t2 = Time.now
+delta = t2 - t1
+puts "All done, #{delta} seconds elapsed."
