@@ -24,6 +24,16 @@ class TripsController < ApplicationController
         end
     end
 
+    def update()
+        trip = @@user.trips.find_by(id: params[:id])
+        trip.name = params[:name]
+        if trip.save
+            render json: { name: params[:name] }, :status => :ok
+        else
+            render json: { error: trip.errors.full_messages }, :status => :bad_request
+        end
+    end
+
     def show()
         trip = trip.find_by(id: params[:id])
         render json: trip
@@ -37,6 +47,11 @@ class TripsController < ApplicationController
     private
     def trip_params()
         params.require(:trip).permit(:id)
+    end
+
+    private
+    def name_params()
+        params.require(:name).permit(:name)
     end
 
 end
