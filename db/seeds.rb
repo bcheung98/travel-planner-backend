@@ -48,7 +48,6 @@ def seed_trip_destinations()
     puts "Done seeding user destination data!"
 end
 
-t1 = Time.now
 # destroy_trip_destinations()
 destroy_destinations()
 # destroy_trips()
@@ -57,6 +56,4 @@ destroy_destinations()
 seed_destinations()
 #seed_trips()
 #seed_trip_destinations()
-t2 = Time.now
-delta = t2 - t1
-puts "All done, #{delta} seconds elapsed."
+puts "All done"
